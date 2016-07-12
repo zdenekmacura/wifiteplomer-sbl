@@ -8,7 +8,7 @@ $(document).ready(function(){
     	var fullname=$("#fullname").val();
     	var email=$("#email").val();
     	var password=$("#password").val();
-    	var dataString="fullname="+fullname+"&email="+email+"&password="+password+"&signup=";
+    	var dataString="fullname="+fullname+"&email="+email+"&password="+password+"&registrace=";
 
         
         if($.trim(fullname).length>0 & $.trim(email).length>0 & $.trim(password).length>0)
@@ -22,11 +22,20 @@ $(document).ready(function(){
 				cache: false,
 				beforeSend: function(){ $("#registrace").text('Connecting...');},
 				success: function(data){
-					$("#debug").html(dataString);
+					date = data.trim();
+					data = data.replace(/(\r\n|\n|\r)/gm,"");
+					var datahelp = data;
+					data = data.substr(0,7);
 					if(data=="success")
 					{
-						alert("Thank you for Registering with us! you can login now");
-					}
+					var userid = datahelp.substring(7);
+					localStorage.userid = userid;
+				    localStorage.fullname = fullname;
+				    localStorage.email = email;
+					$("#registration").hide("slow");
+
+					loadWifiTemp();
+						}
 					else if(data=="exist")
 					{
 						alert("Hey! You alreay has account! you can login with us");
@@ -34,13 +43,11 @@ $(document).ready(function(){
 					else if(data=="failed")
 					{
 						alert("Something Went wrong");
-					} else 
-					{
-						alert("Problem:"+data);
-					}
+					} 
 				}
 			});
-		}return false;
+		}
+		return false;
 ;
     });
     
@@ -140,6 +147,43 @@ $(document).ready(function(){
 		} 
 	});
 });
+
+function loadWifiTemp() {
+	$("#wifitemp").show("slow");
+	$("#welcomename").text(localStorage.fullname);
+	var dataString="getwifitemps=yes";
+}
+
+function delme() {
+	$.ajax({
+				type: "GET",
+				url: url,
+				data: dataString,
+				crossDomain: true,
+				cache: false,
+				beforeSend: function(){ $("#registrace").text('Connecting...');},
+				success: function(data){
+					date = data.trim();
+					data = data.replace(/(\r\n|\n|\r)/gm,"");
+					if(data=="success")
+					{
+					$("#registration").hide("slow");
+					loadWifiTemp();
+						}
+					else if(data=="exist")
+					{
+						alert("Hey! You alreay has account! you can login with us");
+					}
+					else if(data=="failed")
+					{
+						alert("Something Went wrong");
+					} 
+				}
+			});
+}
+
+
+
 
 function verifyEmail() {
 	var emailValue =  $("#emailLogin").val();
