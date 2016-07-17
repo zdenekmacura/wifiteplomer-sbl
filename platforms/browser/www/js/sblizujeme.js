@@ -151,7 +151,30 @@ $(document).ready(function(){
 function loadWifiTemp() {
 	$("#wifitemp").show("slow");
 	$("#welcomename").text(localStorage.fullname);
-	var dataString="getwifitemps=yes";
+	var xmlhttp = new XMLHttpRequest();
+    var url = "http://brrr.cz/brrr.php?getwifitemps=yes&userid="+localStorage.userid;
+    //var url = "http://brrr.cz/brrr.php?getwifitemps=yes&userid=825";
+
+    xmlhttp.onreadystatechange = function() {
+    	if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+        	var listOfTS = JSON.parse(xmlhttp.responseText);
+        	displayTS(listOfTS);
+    	}
+	};
+	xmlhttp.open("GET", url, true);
+	xmlhttp.send();
+}
+
+function displayTS(listOfTS) {
+    var out = "";
+    var i;
+    for(i = 0; i < listOfTS.length; i++) {
+        out += '<span>' + listOfTS[i].ssid + '</span><span>' + listOfTS[i].location + '</span><br>';
+    }
+    if (listOfTS.length == 0) {
+    	out = "Nemáte zatím žádné zaregistrované teploměry";
+    }
+    $("#listOfTS").html(out);
 }
 
 function delme() {
