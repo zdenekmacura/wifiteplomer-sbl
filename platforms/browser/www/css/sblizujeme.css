@@ -58,6 +58,16 @@ body {
 }
 
 
+AddButton::before {
+    content: "+";
+    background-color: yellow;
+	padding-left: 0.3em;
+	padding-right: 0.3em;
+	border-radius: 40.0px 40.0px 40.0px 40.0px;
+	border: 1px solid black;
+	font-size: 1.4em;
+
+}
 
 .ScrollView {
 	background-color: lightsteelblue;
