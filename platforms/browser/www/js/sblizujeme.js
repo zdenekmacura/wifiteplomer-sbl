@@ -69,6 +69,7 @@ $(document).ready(function(){
     $("#createAccount").click(function(e){ 
 		$("#CreateProfile").hide();
 	});
+    
 
 
 	$("#ShowCreateProfile").click(function(){
@@ -165,6 +166,11 @@ function loadWifiTemp() {
 	xmlhttp.send();
 }
 
+function showRegWT() {
+	$("RegWT").text("ahoj")
+	$("RegWT").show();
+}
+
 function displayTS(listOfTS) {
     var out = "";
     var i;
@@ -174,38 +180,12 @@ function displayTS(listOfTS) {
     if (listOfTS.length == 0) {
     	out = "Nemáte zatím žádné zaregistrované teploměry";
     }
-    $("#listOfTS").html(out);
+    $("#listOfTS").html(out + " <AddWTButton/>");
+    $("AddWTButton").click(function() {
+    	showRegWT();
+    });
+
 }
-
-function delme() {
-	$.ajax({
-				type: "GET",
-				url: url,
-				data: dataString,
-				crossDomain: true,
-				cache: false,
-				beforeSend: function(){ $("#registrace").text('Connecting...');},
-				success: function(data){
-					date = data.trim();
-					data = data.replace(/(\r\n|\n|\r)/gm,"");
-					if(data=="success")
-					{
-					$("#registration").hide("slow");
-					loadWifiTemp();
-						}
-					else if(data=="exist")
-					{
-						alert("Hey! You alreay has account! you can login with us");
-					}
-					else if(data=="failed")
-					{
-						alert("Something Went wrong");
-					} 
-				}
-			});
-}
-
-
 
 
 function verifyEmail() {
