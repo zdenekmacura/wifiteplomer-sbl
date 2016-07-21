@@ -26,29 +26,27 @@
 
 <body class="ScrollView">
     <div class="app">
-      <div id=""></div>
-      <div id="registration">
+      <menu></menu>
+      <pages>
+      <RegUserPage>
       Registrace uzivatele pro wifi teplomer:
-
-
-
       <form>
       Jmeno:<input id="fullname" type="text"/>
       e-mail:<input id="email" type="text"/>
       heslo:<input id="password" type="password"/>
       <button id="registrace"><span id="regbuttontext">Zaregistrovat</span></button>
       </form>
-      </div>
+      </RegUserPage>
       
       <div id="wifitemp">
       <title>Wifi Teploměry:</title>
       Dobrý den <span id="welcomename"></span>
       <div id="listOfTS"></div>
-      
-            <RegWT>jojo</RegWT>
       </div>
+      <RegWTPage>ahoj</RegWTPage>
+      </pages>
   
-   </div
+   </div>
    <script src="cordova.js"></script>
    <script src="js/jquery.min.js"></script>
    <script src="js/sblizujeme.js"></script>

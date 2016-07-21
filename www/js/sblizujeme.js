@@ -1,7 +1,18 @@
 
 $(document).ready(function(){
+	    buildMenu();
 
 	    var url="http://www.brrr.cz/brrr.php?";
+
+	    $("MenuItem").click(function() {
+	    	$("pages").children().hide();
+	    	var page = $(this).attr("page");
+	    	$(page).show(500);
+	    	$("MenuItems").hide();
+	    });
+	    $("MenuRoot").click(function() {
+	    	$("MenuItems").toggle();
+	    });
 
         $("#registrace").click(function() {
 
@@ -149,6 +160,13 @@ $(document).ready(function(){
 	});
 });
 
+function buildMenu() {
+	$("Menu").append("<MenuRoot>Menu</MenuRoot>");
+	$("Menu").append("<MenuItems><MenuItems");
+	$("MenuItems").append("<MenuItem page='RegUserPage'>Zaregistrovat uzivatele</MenuItem>");
+	$("MenuItems").append("<MenuItem page='RegWTPage'>Zaregistrovat Wifi teplomer</MenuItem>");
+}
+
 function loadWifiTemp() {
 	$("#wifitemp").show("slow");
 	$("#welcomename").text(localStorage.fullname);
@@ -167,9 +185,13 @@ function loadWifiTemp() {
 }
 
 function showRegWT() {
-	$("RegWT").text("ahoj")
+	$("RegWT").html("<input id=WTAP/><button id=registerTWButton ><span>registrovat</span></button>")
 	$("RegWT").show();
+	$("#registerTWButton").click(function() {
+    	loadRegWT();
+    });
 }
+
 
 function displayTS(listOfTS) {
     var out = "";

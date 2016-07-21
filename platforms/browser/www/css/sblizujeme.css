@@ -69,9 +69,12 @@ AddWTButton::before {
 
 }
 
-RegWT {
+RegWTPage {
 	display: none;
 
+}
+RegUserPage {
+	display: none;
 }
 
 .ScrollView {
@@ -248,7 +251,27 @@ RegWT {
 	display: none;
 }
 
-
+menu{
+	background-color: blue;
+	padding: 5px;
+}
+MenuRoot {
+	background-color: white;
+	display: block;
+	cursor: pointer;
+}
+MenuItem {
+	display: block;
+	cursor: pointer;
+	box-shadow: 0 0 5px -1px rgba(0,0,0,0.2);
+}
+MenuItems {
+	display: none;
+}
+MenuItem:hover {
+	color:red;
+    box-shadow: 0 0 50px -10px rgba(255,255,0,0.6);
+}
 
 .NextButton {
 	margin: 0.8em;
